@@ -2,6 +2,7 @@
   border-radius: 16px;
   text-align: center;
   font: 10px "Red Hat Display";
+  padding: 5px 8px;
 }
 
 .not-clicked {
@@ -10,6 +11,7 @@
 }
 
 .clicked {
+  border: 1px solid var(--primary);
   background-color: var(--primary);
   color: white;
 }
