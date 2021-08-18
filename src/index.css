@@ -11,13 +11,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
-@font-face {
-  font-family: "DM Serif Display", serif;
-  src: url("https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap");
-}
-
-@font-face {
-  font-family: "Red Hat Display", sans-serif;
-  src: url("https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500&display=swap");
-}
