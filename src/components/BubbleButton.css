@@ -1,0 +1,15 @@
+.BubbleButton {
+  border-radius: 16px;
+  text-align: center;
+  font: 10px "Red Hat Display";
+}
+
+.not-clicked {
+  border: 1px solid #717273;
+  color: #717273;
+}
+
+.clicked {
+  background-color: var(--primary);
+  color: white;
+}
