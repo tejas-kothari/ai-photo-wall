@@ -1,0 +1,58 @@
+.optionLayout {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.optionTitle {
+  font-family: Red Hat Display;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 15px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin-right: 10px;
+}
+
+.numFrameBubble {
+  width: 33px;
+  margin-right: 10px;
+}
+
+.wallSizeLayout {
+  margin-bottom: 10px;
+}
+
+.sizeInput {
+  font-family: Red Hat Display;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #3e3e3e;
+  border: solid #e2e2e2;
+  border-width: 0 0 0.5px;
+  outline: none;
+}
+
+.sizeInput:focus {
+  border: solid #000000;
+  border-width: 0 0 0.5px;
+}
+
+.sizeBubbleContainer {
+  margin-bottom: 15px;
+}
+
+.sizeBubble {
+  width: 63.19px;
+  margin-right: 10px;
+}
+
+.scaleBubble {
+  width: 75px;
+  margin-right: 10px;
+}

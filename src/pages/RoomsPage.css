@@ -3,7 +3,7 @@
   flex-direction: column;
 }
 
-.roomsPageBubbleButtons {
+.roomBubble {
   width: 75px;
   margin-right: 10px;
 }

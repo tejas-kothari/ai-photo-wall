@@ -12,12 +12,12 @@ export default function RoomsPage() {
   return (
     <div>
       <h1 className="PageTitle">For you</h1>
-      <div className="BubbleButtonsContainer">
+      <div className="BubbleContainer">
         {["Living Room", "Bedroom", "Dining Room"].map((room, index) => (
           <BubbleButton
             clicked={activatedBtn === index}
             onClick={() => setActivatedBtn(index)}
-            className="roomsPageBubbleButtons"
+            className="roomBubble"
           >
             {room}
           </BubbleButton>
