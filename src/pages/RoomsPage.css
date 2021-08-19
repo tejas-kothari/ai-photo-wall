@@ -1,0 +1,14 @@
+.roomsList {
+  display: flex;
+  flex-direction: column;
+}
+
+.roomsPageBubbleButtons {
+  width: 75px;
+  margin-right: 10px;
+}
+
+.roomImg {
+  margin-top: 20px;
+  border-radius: 4px;
+}
