@@ -1,0 +1,47 @@
+.frame-button-container {
+	display: flex;
+	flex-direction: row;
+	margin-top: -12px;
+	position: absolute;
+}
+
+.frame-button {
+	height: 25px;
+	width: 25px;
+	border-radius: 100px;
+	border-style: solid;
+	background-color: white;
+	text-align: center;
+}
+
+.button-options {
+	height: 60px;
+	width: 120px;
+	background-color: white;
+	margin-left: 10px;
+	border-style: solid;
+	border-radius: 10px;
+}
+
+.add-button {
+	height: 22px;
+	width: 120px;
+	margin: auto auto;
+	line-height: 30px;
+	text-align: center;
+	font-size: 12px;
+}
+
+.delete-button {
+	height: 25px;
+	line-height: 10px;
+	width: 120px;
+	margin: auto auto;
+	text-align: center;
+	color: red;
+	font-size: 12px;
+}
+
+.divider {
+	border-top: solid;
+}
