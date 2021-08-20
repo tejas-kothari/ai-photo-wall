@@ -1,8 +1,11 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useLayoutEffect } from "react";
 import "styles.css";
 import "./WallAreaPage.css";
 import BubbleButton from "components/BubbleButton";
 import ActionButton from "components/ActionButton";
+import Frame from "components/Frame";
+import wallImg from "assets/wall-area.png";
+import testImg from "assets/test-img.png";
 
 export default function WallAreaPage() {
   const [numFrames, setNumFrames] = useState(1);
@@ -10,6 +13,112 @@ export default function WallAreaPage() {
   const [sizePreset, setSizePreset] = useState("Large");
   const sizeInput = useRef(null);
   const [scale, setScale] = useState("Small (38%)");
+  const frameAreaRef = useRef(null);
+  const [frameAreaWidth, setFrameAreaWidth] = useState(0);
+
+  const inspireFrameLayout = [
+    [{ width: 0.35, ratio: 1.6, left: 0.5 }],
+    [{ width: 0.56, ratio: 0.625, left: 0.5 }],
+    [
+      { width: 0.35, ratio: 1.6, left: 0.3 },
+      { width: 0.35, ratio: 1.6, left: 0.7 },
+    ],
+    [
+      { width: 0.5, ratio: 0.625, left: 0.22 },
+      { width: 0.5, ratio: 0.625, left: 0.78 },
+    ],
+    [
+      { width: 0.35, ratio: 1.6, left: 0.3 },
+      {
+        width: 0.56,
+        ratio: 0.625,
+        left: 0.78,
+        top: frameAreaWidth * 0.36 * 1.6 * 0.25,
+      },
+    ],
+    [
+      { width: 0.45, ratio: 1, left: 0.25 },
+      { width: 0.45, ratio: 1, left: 0.75 },
+    ],
+    [
+      { width: 0.35, ratio: 1.6, left: 0.1 },
+      { width: 0.35, ratio: 1.6, left: 0.5 },
+      { width: 0.35, ratio: 1.6, left: 0.9 },
+    ],
+    [
+      {
+        width: 0.38,
+        ratio: 0.625,
+        left: 0.1,
+        top: frameAreaWidth * 0.26 * 1.6 * 0.4,
+      },
+      {
+        width: 0.38,
+        ratio: 0.625,
+        left: 0.5,
+        top: frameAreaWidth * 0.26 * 1.6 * 0.4,
+      },
+      {
+        width: 0.38,
+        ratio: 0.625,
+        left: 0.9,
+        top: frameAreaWidth * 0.26 * 1.6 * 0.4,
+      },
+    ],
+    [
+      { width: 0.26, ratio: 1.6, left: 0.13 },
+      {
+        width: 0.416,
+        ratio: 0.625,
+        left: 0.5,
+        top: frameAreaWidth * 0.26 * 1.6 * 0.25,
+      },
+      { width: 0.26, ratio: 1.6, left: 0.87 },
+    ],
+    [
+      {
+        width: 0.416,
+        ratio: 0.625,
+        left: 0.13,
+        top: frameAreaWidth * 0.26 * 1.6 * 0.25,
+      },
+      { width: 0.26, ratio: 1.6, left: 0.5 },
+      {
+        width: 0.416,
+        ratio: 0.625,
+        left: 0.87,
+        top: frameAreaWidth * 0.26 * 1.6 * 0.25,
+      },
+    ],
+    [
+      { width: 0.35, ratio: 1, left: 0.1 },
+      { width: 0.35, ratio: 1, left: 0.5 },
+      { width: 0.35, ratio: 1, left: 0.9 },
+    ],
+  ];
+
+  const numToPerString = (num) => {
+    return num * 100 + "%";
+  };
+
+  useLayoutEffect(() => {
+    if (frameAreaRef.current) {
+      setFrameAreaWidth(frameAreaRef.current.offsetWidth);
+    }
+  });
+
+  const calcFrameAreaWidth = () => {
+    const parsedDim = sizeVal
+      .split(" X ")
+      .map((value) => value.replace("m", ""))
+      .map((value) => parseFloat(value));
+
+    let parsedScale = parseInt(scale.replace(/\D/g, ""));
+
+    let width = (parsedDim[0] * parsedDim[1] * parsedScale) / (2 * 2.2);
+    console.log(width);
+    return width;
+  };
 
   const selectSize = (sizeOption) => {
     setSizePreset(sizeOption);
@@ -69,7 +178,7 @@ export default function WallAreaPage() {
       <div className="optionLayout">
         <span className="optionTitle">Scale:</span>
         <span className="BubbleContainer">
-          {["Small (38%)", "Medium (42%)", "Large (68%)"].map((scaleOption) => (
+          {["Small (38%)", "Medium (53%)", "Large (68%)"].map((scaleOption) => (
             <BubbleButton
               clicked={scaleOption === scale}
               onClick={() => setScale(scaleOption)}
@@ -79,6 +188,37 @@ export default function WallAreaPage() {
             </BubbleButton>
           ))}
         </span>
+      </div>
+      <div className="roomsList">
+        {inspireFrameLayout
+          .filter((layoutObj) => layoutObj.length === numFrames)
+          .map((layoutObj) => (
+            <div className="frameRoomContainer">
+              <img src={wallImg} className="roomImg" />
+              <div
+                className="frameArea"
+                style={{ width: calcFrameAreaWidth() + "%" }}
+              >
+                <div className="framesContainer" ref={frameAreaRef}>
+                  {layoutObj.map((frameObj) => (
+                    <Frame
+                      img={testImg}
+                      className="framePos"
+                      style={{
+                        width: numToPerString(frameObj.width),
+                        height:
+                          frameAreaWidth * frameObj.width * frameObj.ratio,
+                        left: frameObj.left
+                          ? numToPerString(frameObj.left)
+                          : "auto",
+                        top: frameObj.top ? frameObj.top : "auto",
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
       </div>
       <ActionButton clicked={false} caretLeft={true}>
         Back

@@ -1,0 +1,16 @@
+.Frame {
+  background-color: white;
+  border: 2px solid #181818;
+  box-shadow: 2px 4px 4px 0px #00000026;
+  /* box-shadow: -2px 2px 2px 0px #00000080 inset; */
+  padding: 4% 4%;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.Frame img {
+  background-size: cover;
+  /* height: auto; */
+  width: 100%;
+}

@@ -56,3 +56,30 @@
   width: 75px;
   margin-right: 10px;
 }
+
+.frameRoomContainer {
+  position: relative;
+  overflow: hidden;
+}
+
+.frameArea {
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  right: 50%;
+  transform: translateX(-50%);
+  min-height: 20px;
+}
+
+.frameRoomContainer .roomImg {
+  margin-top: 0px;
+}
+
+.framesContainer {
+  position: relative;
+}
+
+.framePos {
+  position: absolute;
+  transform: translateX(-50%);
+}
