@@ -7,7 +7,7 @@ export default function FrameButton(props){
 
   
   return(
-		<div className="frame-button-container" style={{marginLeft:props.marginLeft-12}}>
+		<div id={props.id} className="frame-button-container" style={{marginLeft:props.marginLeft-12}}>
 			<div className="frame-button" onClick={() => setButtonState(!buttonState)}>
 				+			
 			</div>
@@ -18,7 +18,7 @@ export default function FrameButton(props){
 						Add New Frame
 					</div>
 					<hr className="divider"/>
-					<div className="delete-button" onClick={props.onClickDelete}>
+					<div id={props.id} className="delete-button" onClick={props.onClickDelete}>
 						Delete Frame
 					</div>
 				</div> 

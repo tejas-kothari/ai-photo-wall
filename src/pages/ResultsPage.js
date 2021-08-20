@@ -16,6 +16,17 @@ export default function ResultsPage(){
 		setframeArray1(frameArray);
 	}
 
+	const handleDeleteFrame = (e) => {
+		let frameArray = [...frameArray1]
+		var key = e.target.id
+		var index = frameArray.indexOf(key)
+		if (index !== -1) {
+			frameArray.splice(index, 1);
+			setframeArray1(frameArray);
+		}
+		console.log(frameArray)
+	}
+
   return(
 		<div>
 			<div className="title">
@@ -25,7 +36,7 @@ export default function ResultsPage(){
         <div className="frames-container-outer" style={{height:700, width:800}}>
           {frameArray1.map((frame) => (
 						<div className="frames-container-inner" key={frame} style={{height:150, width:100}}>
-							<FrameButton marginLeft={100} onClickAdd={() => handleAddFrame()}/>
+							<FrameButton id={frame} marginLeft={100} onClickAdd={() => handleAddFrame()} onClickDelete={(e) => handleDeleteFrame(e)}/>
 							<Frame identifier={"frame-1"}/>
 						</div>
         	))}
