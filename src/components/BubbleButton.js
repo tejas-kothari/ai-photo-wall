@@ -3,7 +3,7 @@ import "styles.css";
 
 export default function BubbleButton(props) {
   return (
-    <span
+    <div
       onClick={props.onClick}
       className={
         "BubbleButton " +
@@ -14,6 +14,6 @@ export default function BubbleButton(props) {
       style={props.style}
     >
       {props.children}
-    </span>
+    </div>
   );
 }

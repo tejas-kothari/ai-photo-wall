@@ -1,0 +1,35 @@
+.ActionButton {
+  border-radius: 32px;
+  font-family: Red Hat Display;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: center;
+  padding: 5px 0px;
+  border: 1px solid var(--primary);
+  width: 130px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.AB_not-clicked {
+  color: var(--primary);
+}
+
+.AB_clicked {
+  background-color: var(--primary);
+  color: white;
+}
+
+.caretLeft {
+  display: inline-block;
+  border-right: 1px solid #ff9632;
+  border-bottom: 1px solid #ff9632;
+  width: 6px;
+  height: 6px;
+  transform: rotate(135deg);
+  margin-right: 5px;
+}

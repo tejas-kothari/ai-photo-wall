@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import "styles.css";
 import "./WallAreaPage.css";
 import BubbleButton from "components/BubbleButton";
+import ActionButton from "components/ActionButton";
 
 export default function WallAreaPage() {
   const [numFrames, setNumFrames] = useState(1);
@@ -79,6 +80,9 @@ export default function WallAreaPage() {
           ))}
         </span>
       </div>
+      <ActionButton clicked={false} caretLeft={true}>
+        Back
+      </ActionButton>
     </div>
   );
 }
