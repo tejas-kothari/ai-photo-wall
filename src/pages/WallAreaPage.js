@@ -16,6 +16,12 @@ export default function WallAreaPage() {
   const frameAreaRef = useRef(null);
   const [frameAreaWidth, setFrameAreaWidth] = useState(0);
 
+  useLayoutEffect(() => {
+    if (frameAreaRef.current) {
+      setFrameAreaWidth(frameAreaRef.current.offsetWidth);
+    }
+  });
+
   const inspireFrameLayout = [
     [{ width: 0.35, ratio: 1.6, left: 0.5 }],
     [{ width: 0.56, ratio: 0.625, left: 0.5 }],
@@ -33,7 +39,7 @@ export default function WallAreaPage() {
         width: 0.56,
         ratio: 0.625,
         left: 0.78,
-        top: frameAreaWidth * 0.36 * 1.6 * 0.25,
+        top: frameAreaWidth * 0.35 * 1.6 * 0.25,
       },
     ],
     [
@@ -100,12 +106,6 @@ export default function WallAreaPage() {
   const numToPerString = (num) => {
     return num * 100 + "%";
   };
-
-  useLayoutEffect(() => {
-    if (frameAreaRef.current) {
-      setFrameAreaWidth(frameAreaRef.current.offsetWidth);
-    }
-  });
 
   const calcFrameAreaWidth = () => {
     const parsedDim = sizeVal
