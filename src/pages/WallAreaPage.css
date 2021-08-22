@@ -1,3 +1,8 @@
+.WallAreaPage {
+  padding-left: 35px;
+  padding-right: 35px;
+}
+
 .optionLayout {
   display: flex;
   align-items: center;
@@ -60,6 +65,7 @@
 .frameRoomContainer {
   position: relative;
   overflow: hidden;
+  margin-top: 20px;
 }
 
 .frameArea {

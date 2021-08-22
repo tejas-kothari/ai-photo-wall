@@ -10,7 +10,7 @@ export default function RoomsPage() {
   const [activatedBtn, setActivatedBtn] = useState(0);
 
   return (
-    <div>
+    <div className="RoomsPage">
       <h1 className="PageTitle">For you</h1>
       <div className="BubbleContainer">
         {["Living Room", "Bedroom", "Dining Room"].map((room, index) => (
