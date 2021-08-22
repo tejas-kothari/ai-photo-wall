@@ -5,8 +5,10 @@ import BubbleButton from "components/BubbleButton";
 import room1Img from "assets/rooms/1.png";
 import room2Img from "assets/rooms/2.png";
 import room3Img from "assets/rooms/3.png";
+import { useHistory } from "react-router-dom";
 
 export default function RoomsPage() {
+  let history = useHistory();
   const [activatedBtn, setActivatedBtn] = useState(0);
 
   return (
@@ -25,7 +27,11 @@ export default function RoomsPage() {
       </div>
       <div className="roomsList">
         {[room1Img, room2Img, room3Img].map((roomImg) => (
-          <img className="roomImg" src={roomImg} />
+          <img
+            className="roomImg"
+            src={roomImg}
+            onClick={() => history.push("/wall-area")}
+          />
         ))}
       </div>
     </div>

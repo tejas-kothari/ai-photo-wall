@@ -6,8 +6,10 @@ import ActionButton from "components/ActionButton";
 import Frame from "components/Frame";
 import wallImg from "assets/wall-area.png";
 import testImg from "assets/test-img.png";
+import { useHistory } from "react-router-dom";
 
 export default function WallAreaPage() {
+  let history = useHistory();
   const [numFrames, setNumFrames] = useState(1);
   const [sizeVal, setSizeVal] = useState("2m X 2.2m");
   const [sizePreset, setSizePreset] = useState("Large");
@@ -220,7 +222,11 @@ export default function WallAreaPage() {
             </div>
           ))}
       </div>
-      <ActionButton clicked={false} caretLeft={true}>
+      <ActionButton
+        clicked={false}
+        caretLeft={true}
+        onClick={() => history.push("/")}
+      >
         Back
       </ActionButton>
     </div>
