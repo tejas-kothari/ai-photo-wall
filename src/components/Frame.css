@@ -12,3 +12,27 @@
   object-fit: cover;
   width: 100%;
 }
+.frame-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.size-label {
+	font-size: 12px;
+	position: absolute;
+}
+
+.upload-label {
+	font-size: 10px;
+	margin: auto auto;
+	display: inline-block;
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	text-align: center;
+	padding: 3% 3%;
+}
+
+.upload-button {
+	visibility: hidden;
+}
