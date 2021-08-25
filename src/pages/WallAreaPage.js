@@ -166,7 +166,7 @@ export default function WallAreaPage() {
           onChange={(event) => changeSizeVal(event.target.value)}
         />
       </div>
-      <div className="BubbleContainer sizeBubbleContainer">
+      <div className="BubbleContainer optionLayout">
         {["Large", "Medium", "Small", "Custom"].map((sizeOption) => (
           <BubbleButton
             clicked={sizePreset === sizeOption}
@@ -191,7 +191,7 @@ export default function WallAreaPage() {
           ))}
         </span>
       </div>
-      <div className="roomsList">
+      <div className="imgList">
         {inspireFrameLayout
           .filter((layoutObj) => layoutObj.length === numFrames)
           .map((layoutObj) => (
@@ -223,6 +223,7 @@ export default function WallAreaPage() {
           ))}
       </div>
       <ActionButton
+        className="WA-backButton"
         clicked={false}
         caretLeft={true}
         onClick={() => history.push("/")}
