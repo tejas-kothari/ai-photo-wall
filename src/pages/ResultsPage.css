@@ -16,7 +16,7 @@
   letter-spacing: 0em;
   text-align: left;
   margin-right: 10px;
-	color: #a9a9a9;
+	color: #a1a1a1;
 }
 
 .infoContent {
@@ -37,4 +37,28 @@
 
 .frameRoomContainer {
 	margin-top: 5%;
+}
+
+.UploadLabel {
+	border-radius: 32px;
+  font-family: Red Hat Display;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: center;
+  padding: 5px 0px;
+  border: 1px solid var(--primary);
+  width: 130px;
+	height: 19px
+}
+
+.changeButtonContainer {
+	height: 200px;
+}
+
+.actionButtonContainer {
+	display: flex;
+	justify-content: space-between;
 }
