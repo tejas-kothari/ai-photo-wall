@@ -86,7 +86,6 @@
 
 .framePos {
   position: absolute;
-  transform: translateX(-50%);
 }
 
 .WA-backButton {
