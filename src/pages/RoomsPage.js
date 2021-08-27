@@ -25,7 +25,7 @@ export default function RoomsPage() {
           </BubbleButton>
         ))}
       </div>
-      <div className="roomsList">
+      <div className="imgList">
         {[room1Img, room2Img, room3Img].map((roomImg) => (
           <img
             className="roomImg"

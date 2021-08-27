@@ -41,7 +41,7 @@ export default function WallAreaPage() {
         width: 0.56,
         ratio: 0.625,
         left: 0.78,
-        top: frameAreaWidth * 0.35 * 1.6 * 0.25,
+        top: frameAreaWidth * 0.35 * 1.6 * 0.5,
       },
     ],
     [
@@ -79,7 +79,7 @@ export default function WallAreaPage() {
         width: 0.416,
         ratio: 0.625,
         left: 0.5,
-        top: frameAreaWidth * 0.26 * 1.6 * 0.25,
+        top: frameAreaWidth * 0.26 * 1.6 * 0.5,
       },
       { width: 0.26, ratio: 1.6, left: 0.87 },
     ],
@@ -88,14 +88,14 @@ export default function WallAreaPage() {
         width: 0.416,
         ratio: 0.625,
         left: 0.13,
-        top: frameAreaWidth * 0.26 * 1.6 * 0.25,
+        top: frameAreaWidth * 0.26 * 1.6 * 0.5,
       },
       { width: 0.26, ratio: 1.6, left: 0.5 },
       {
         width: 0.416,
         ratio: 0.625,
         left: 0.87,
-        top: frameAreaWidth * 0.26 * 1.6 * 0.25,
+        top: frameAreaWidth * 0.26 * 1.6 * 0.5,
       },
     ],
     [
@@ -166,7 +166,7 @@ export default function WallAreaPage() {
           onChange={(event) => changeSizeVal(event.target.value)}
         />
       </div>
-      <div className="BubbleContainer sizeBubbleContainer">
+      <div className="BubbleContainer optionLayout">
         {["Large", "Medium", "Small", "Custom"].map((sizeOption) => (
           <BubbleButton
             clicked={sizePreset === sizeOption}
@@ -191,7 +191,7 @@ export default function WallAreaPage() {
           ))}
         </span>
       </div>
-      <div className="roomsList">
+      <div className="imgList">
         {inspireFrameLayout
           .filter((layoutObj) => layoutObj.length === numFrames)
           .map((layoutObj) => (
@@ -225,6 +225,9 @@ export default function WallAreaPage() {
                           ? numToPerString(frameObj.left)
                           : "auto",
                         top: frameObj.top ? frameObj.top : "auto",
+                        transform: frameObj.top
+                          ? "translate(-50%, -50%)"
+                          : "translate(-50%, 0)",
                       }}
                     />
                   ))}
@@ -234,6 +237,7 @@ export default function WallAreaPage() {
           ))}
       </div>
       <ActionButton
+        className="WA-backButton"
         clicked={false}
         caretLeft={true}
         onClick={() => history.push("/")}

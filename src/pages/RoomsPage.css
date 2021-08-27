@@ -1,6 +1,13 @@
 .RoomsPage {
   padding-left: 35px;
   padding-right: 35px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.RoomsPage .BubbleContainer {
+  margin-bottom: 10px;
 }
 
 .roomBubble {

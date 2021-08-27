@@ -1,7 +1,6 @@
 .moveButtonContainer {
 	position: absolute;
-	transform: translateX(-50);
-	z-index: 999;
+	z-index: 99;
 	margin-top: 2px;
     height: 25px;
 	width: 25px;

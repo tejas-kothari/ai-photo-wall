@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Frame.css";
 import "styles.css";
+import FrameButton from "components/FrameButton";
 
 export default function Frame(props){
   const [image, setImage] = useState(props.img);
@@ -16,17 +17,10 @@ export default function Frame(props){
   return(
     <div className="frame-container">
     	<div className={"Frame " + props.className} style={props.style}>
-				{/* <label htmlFor={props.identifier} className="upload-label">
-					{
-						image === undefined ?
-							"Upload" :
-							"" 
-					} 
-				</label> */}
       	<img className="image" src={props.img}/>
       	<br/>
     	</div>
-    	<input type="file" id={props.identifier} className="upload-button" onChange={(e) => onImageChange(e)} ref={props.ref}/>
+			<input type="file" id={props.identifier} className="upload-button" onChange={(e) => onImageChange(e)} ref={props.ref}/>
     </div>
   )
 }

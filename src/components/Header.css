@@ -1,0 +1,16 @@
+.Header {
+  height: 68px;
+  padding: 21px 29px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rightHeader {
+  display: flex;
+  align-items: center;
+}
+
+.rightHeader > * {
+  margin: 0px 10px;
+}

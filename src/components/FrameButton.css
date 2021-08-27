@@ -2,9 +2,8 @@
 	display: flex;
 	flex-direction: row;
 	position: absolute;
-	transform: translateX(-50);
 	z-index: 999;
-	margin-top: -12px;
+	margin-top: -10px;
 	margin-left: -12px;
 }
 
@@ -14,8 +13,9 @@
 	border-radius: 100px;
 	border-style: solid;
 	background-color: white;
+	justify-content: center;
+	align-items: center;
 	text-align: center;
-	line-height: 18px;
 }
 
 .button-options {
@@ -48,4 +48,12 @@
 .divider {
 	border-top: solid;
 	color: #a9a9a9;
+}
+
+.optionText {
+	font-family: Red Hat Display;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 500;
+	line-height: 13px;
 }

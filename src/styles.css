@@ -13,6 +13,7 @@
   line-height: 33px;
   letter-spacing: 0em;
   text-align: left;
+  margin-top: 0px;
 }
 
 .BubbleContainer {
@@ -20,13 +21,13 @@
   align-items: center;
 }
 
-.roomsList {
-  display: flex;
-  flex-direction: column;
+.imgList {
+  flex: 1;
+  overflow-y: scroll;
 }
 
 .roomImg {
   width: 100%;
-  margin-top: 20px;
+  margin-bottom: 20px;
   border-radius: 4px;
 }
