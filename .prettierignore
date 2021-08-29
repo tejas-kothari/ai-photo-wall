@@ -1,0 +1,9 @@
+# Ignore artifacts:
+.firebase
+build
+node_modules
+public
+.firebaserc
+.gitignore
+package-lock.json
+README.md
