@@ -195,17 +195,19 @@ export default function WallAreaPage() {
         {inspireFrameLayout
           .filter((layoutObj) => layoutObj.length === numFrames)
           .map((layoutObj) => (
-            <div 
-              className="frameRoomContainer" 
-              onClick={() => history.push("/results",{
-                areaWidth: calcFrameAreaWidth(),
-                layout: layoutObj,
-                wallImage: wallImg,
-                frameAreaWidth: frameAreaWidth,
-                testImg: testImg,
-                sizeVal: sizeVal,
-                scale: scale
-              })}
+            <div
+              className="frameRoomContainer"
+              onClick={() =>
+                history.push("/results", {
+                  areaWidth: calcFrameAreaWidth(),
+                  layout: layoutObj,
+                  wallImage: wallImg,
+                  frameAreaWidth: frameAreaWidth,
+                  testImg: testImg,
+                  sizeVal: sizeVal,
+                  scale: scale,
+                })
+              }
             >
               <img src={wallImg} className="roomImg" />
               <div

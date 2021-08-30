@@ -1,14 +1,11 @@
 .ResultsPage {
-	padding-left: 35px;
-	padding-right: 35px;
-}
-
-.PageTitle {
-	margin-left: 5%;
+  padding-left: 35px;
+  padding-right: 35px;
+  height: 100%;
 }
 
 .infoTitle {
-	font-family: Red Hat Display;
+  font-family: Red Hat Display;
   font-size: 11px;
   font-style: normal;
   font-weight: 400;
@@ -16,11 +13,11 @@
   letter-spacing: 0em;
   text-align: left;
   margin-right: 10px;
-	color: #a1a1a1;
+  color: #a1a1a1;
 }
 
 .infoContent {
-	font-family: Red Hat Display;
+  font-family: Red Hat Display;
   font-size: 11px;
   font-style: normal;
   font-weight: 400;
@@ -31,16 +28,16 @@
 }
 
 .infoContainer {
-	display: flex;
-	margin-left: 5%;
+  display: flex;
+  margin-left: 5%;
 }
 
 .frameRoomContainer {
-	margin-top: 5%;
+  margin-top: 5%;
 }
 
 .UploadLabel {
-	border-radius: 32px;
+  border-radius: 32px;
   font-family: Red Hat Display;
   font-size: 14px;
   font-style: normal;
@@ -51,14 +48,14 @@
   padding: 5px 0px;
   border: 1px solid var(--primary);
   width: 130px;
-	height: 19px
+  height: 19px;
 }
 
 .changeButtonContainer {
-	height: 200px;
+  height: 200px;
 }
 
 .actionButtonContainer {
-	display: flex;
-	justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
