@@ -38,3 +38,46 @@
   top: 0;
   left: 100%;
 }
+
+.edit-options-container {
+  box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: 0;
+  left: 120%;
+  height: 70px;
+  width: 117px;
+  background-color: white;
+  border-radius: 4px;
+  font-family: Red Hat Display;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 13px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.edit-options {
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #263238;
+  margin-left: 14%;
+}
+
+.edit-options > img {
+  margin-right: 5px;
+}
+
+.edit-options > div {
+  flex: 1;
+}
+
+.delete-button {
+  color: red;
+}
+
+.options-divider {
+  border: 0.3px solid rgba(38, 50, 56, 0.2);
+}

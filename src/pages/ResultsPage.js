@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import "styles.css";
 import "./ResultsPage.css";
 import Frame from "components/Frame";
-import FrameButton from "components/FrameButton";
 import ActionButton from "components/ActionButton";
 import download_icon from "assets/download_icon.svg";
 import { useLocation } from "react-router-dom";
@@ -94,7 +93,7 @@ export default function ResultsPage() {
   };
 
   return (
-    <div className="ResultsPage">
+    <div className="ResultsPage" id="ResultsPage">
       <h1 className="PageTitle">Your AI Wall</h1>
       <div className="infoContainer">
         <div style={{ width: 80 }}>
