@@ -4,48 +4,32 @@ import "./ResultsPage.css";
 import Frame from "components/Frame";
 import FrameButton from "components/FrameButton";
 import ActionButton from "components/ActionButton";
-import MoveFrameButton from "components/MoveFrameButton";
-import ChangePictureButton from "components/ChangePictureButton";
 import download_icon from "assets/download_icon.svg";
 import { useLocation } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import Draggable from "react-draggable";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import { useDispatch, useSelector } from "react-redux";
+import { activateFCB } from "features/uiSlice";
 
 export default function ResultsPage() {
+  const { frameIndex, buttonIndex } = useSelector((state) => state.ui);
   const location = useLocation();
   let history = useHistory();
-
-  const bottomMenuOptions = {
-    FrameInfo: "Frame Info",
-    ChangeImage: "Change Image",
-  };
-
-  const [frameArray1, setframeArray1] = useState(location.state.layout);
-  const [bottomMenu, setBottomMenu] = useState(bottomMenuOptions.FrameInfo);
-  const [currentFrame, setCurrentFrame] = useState(null);
-  const [currentButton, setCurrentButton] = useState(null);
-  const [image, setImage] = useState(null);
+  const dispatch = useDispatch();
   const fileInputRef = useRef();
 
-  useEffect(() => {
-    let frameArray = [...frameArray1];
-    for (var i = 0; i < frameArray.length; i++) {
-      frameArray[i].key = i;
-    }
-    console.log(frameArray);
-    setframeArray1(frameArray);
-  }, []);
+  const [frameArray1, setframeArray1] = useState(location.state.layout);
 
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
-      let img = event.target.files[0];
-      console.log(img);
-      let frameArray = [...frameArray1];
-      frameArray[currentFrame].image = URL.createObjectURL(img);
-      setframeArray1(frameArray);
-      console.log(frameArray1);
+      let newImg = URL.createObjectURL(event.target.files[0]);
+      setframeArray1((arr) => {
+        let newArr = [...arr];
+        newArr[frameIndex].image = newImg;
+        return newArr;
+      });
     }
   };
 
@@ -76,55 +60,21 @@ export default function ResultsPage() {
     console.log(frameArray1);
   };
 
-  const handleChangeButton = (object) => {
-    if (currentFrame !== object.key) {
-      setCurrentFrame(object.key);
-      setCurrentButton("ChangePicture");
-      setBottomMenu(bottomMenuOptions.ChangeImage);
-    } else if (
-      currentFrame === object.key &&
-      currentButton === "ChangePicture"
-    ) {
-      setCurrentFrame(null);
-      setBottomMenu(bottomMenuOptions.FrameInfo);
-      setCurrentButton(null);
-    } else if (
-      currentFrame === object.key &&
-      currentButton !== "ChangePicture"
-    ) {
-      setBottomMenu(bottomMenuOptions.ChangeImage);
-      setCurrentButton("ChangePicture");
-    }
-    console.log(object.image);
-    setImage(object.image);
-  };
-
-  const handleMoveButton = (object) => {
-    if (currentFrame !== object.key) {
-      setCurrentFrame(object.key);
-      setCurrentButton("Move");
-      setBottomMenu(bottomMenuOptions.FrameInfo);
-    } else if (currentFrame === object.key && currentButton === "Move") {
-      setCurrentFrame(null);
-      setCurrentButton(null);
-    } else if (currentFrame === object.key && currentButton !== "Move") {
-      setCurrentButton("Move");
-    }
-  };
-
   const handleResetChanges = () => {
-    let frameArray = [...frameArray1];
-    frameArray[currentFrame].image = image;
-    setframeArray1(frameArray);
-    setBottomMenu(bottomMenuOptions.FrameInfo);
-    setCurrentFrame(null);
-    setCurrentButton(null);
+    setframeArray1((arr) => {
+      let newArr = [...arr];
+      newArr[frameIndex].image = null;
+      return newArr;
+    });
   };
 
   const handleApplyChanges = () => {
-    setBottomMenu(bottomMenuOptions.FrameInfo);
-    setCurrentFrame(null);
-    setCurrentButton(null);
+    dispatch(
+      activateFCB({
+        frameIndex: -1,
+        buttonIndex: -1,
+      })
+    );
   };
 
   const downloadDocument = () => {
@@ -166,11 +116,7 @@ export default function ResultsPage() {
             {frameArray1.map((frameObj, index) => (
               <div key={frameObj.key}>
                 <Draggable
-                  disabled={
-                    currentFrame == frameObj.key && currentButton === "Move"
-                      ? false
-                      : true
-                  }
+                  disabled={!(index === frameIndex && buttonIndex === 1)}
                 >
                   <div>
                     {/* <FrameButton
@@ -179,39 +125,6 @@ export default function ResultsPage() {
                       top={frameObj.top ? frameObj.top / 2.6 : "auto"}
                       onClickAdd={(e) => handleAddFrame(e)}
                       onClickDelete={(e) => handleDeleteFrame(e)}
-                    /> */}
-                    {/* <ChangePictureButton
-                      marginLeft={frameObj.left - frameObj.width / 2}
-                      top={frameObj.top ? frameObj.top / 2 : "auto"}
-                      index={frameObj.key}
-                      onClick={(e) => handleChangeButton(frameObj)}
-                      borderColor={
-                        currentFrame == frameObj.key &&
-                        currentButton === "ChangePicture"
-                          ? "orange"
-                          : "black"
-                      }
-                      transform={
-                        frameObj.top
-                          ? "translate(-50%, -50%)"
-                          : "translate(-50%, 0)"
-                      }
-                    /> */}
-                    {/* <MoveFrameButton
-                      marginLeft={frameObj.left}
-                      top={frameObj.top ? frameObj.top / 2 : "auto"}
-                      index={frameObj.key}
-                      onClick={(e) => handleMoveButton(frameObj)}
-                      borderColor={
-                        currentFrame == frameObj.key && currentButton === "Move"
-                          ? "orange"
-                          : "black"
-                      }
-                      transform={
-                        frameObj.top
-                          ? "translate(-50%, -50%)"
-                          : "translate(-50%, 0)"
-                      }
                     /> */}
                     <Frame
                       frameIndex={index}
@@ -240,55 +153,43 @@ export default function ResultsPage() {
           </div>
         </div>
       </div>
-      <div>
-        {bottomMenu === bottomMenuOptions.FrameInfo ? (
-          <div>
-            <div style={{ height: 200 }}>Available At:</div>
-            <div className="actionButtonContainer">
-              <ActionButton
-                clicked={false}
-                caretLeft={true}
-                onClick={() => history.push("/wall-area")}
-              >
-                Back
-              </ActionButton>
-              <ActionButton
-                clicked={true}
-                style={{}}
-                onClick={() => downloadDocument()}
-              >
-                Download&nbsp;
-                <img src={download_icon} />
-              </ActionButton>
-            </div>
+      <div className="resultsDetails">
+        {buttonIndex === 0 ? (
+          <div className="changeImgContainer">
+            <ActionButton onClick={() => fileInputRef.current.click()}>
+              Change image
+            </ActionButton>
+            <input
+              type="file"
+              hidden
+              ref={fileInputRef}
+              onChange={onImageChange}
+            />
           </div>
         ) : (
-          <div>
-            <div className="changeButtonContainer">
-              <ActionButton
-                onClick={() => fileInputRef.current.click()}
-                style={{ margin: "auto" }}
-              >
-                Change Image
-              </ActionButton>
-              <input
-                type="file"
-                id="input"
-                className="upload-button"
-                hidden
-                onChange={(e) => onImageChange(e)}
-                ref={fileInputRef}
-              />
-            </div>
-            <div className="actionButtonContainer">
-              <ActionButton onClick={() => handleResetChanges()}>
-                Reset
-              </ActionButton>
-              <ActionButton onClick={() => handleApplyChanges()} style={{}}>
-                Apply
-              </ActionButton>
-            </div>
-          </div>
+          <div>Available At:</div>
+        )}
+      </div>
+
+      <div className="actionButtonContainer">
+        {buttonIndex === 0 ? (
+          <>
+            <ActionButton onClick={handleResetChanges}>Reset</ActionButton>
+            <ActionButton onClick={handleApplyChanges}>Apply</ActionButton>
+          </>
+        ) : (
+          <>
+            <ActionButton
+              caretLeft={true}
+              onClick={() => history.push("/wall-area")}
+            >
+              Back
+            </ActionButton>
+            <ActionButton clicked={true} onClick={downloadDocument}>
+              Download&nbsp;
+              <img src={download_icon} />
+            </ActionButton>
+          </>
         )}
       </div>
     </div>

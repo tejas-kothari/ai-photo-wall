@@ -1,7 +1,7 @@
 .ResultsPage {
-  padding-left: 35px;
-  padding-right: 35px;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .infoTitle {
@@ -29,33 +29,29 @@
 
 .infoContainer {
   display: flex;
-  margin-left: 5%;
+  /* margin-left: 5%; */
+  padding-left: 35px;
+  padding-right: 35px;
 }
 
 .frameRoomContainer {
   margin-top: 5%;
 }
 
-.UploadLabel {
-  border-radius: 32px;
-  font-family: Red Hat Display;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 19px;
-  letter-spacing: 0em;
-  text-align: center;
-  padding: 5px 0px;
-  border: 1px solid var(--primary);
-  width: 130px;
-  height: 19px;
-}
-
-.changeButtonContainer {
-  height: 200px;
+.resultsDetails {
+  flex: 1;
+  padding: 0 35px;
 }
 
 .actionButtonContainer {
+  padding: 0 35px;
   display: flex;
   justify-content: space-between;
+  margin: 12px 0;
+}
+
+.changeImgContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
