@@ -10,30 +10,29 @@ import Draggable from "react-draggable";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { useDispatch, useSelector } from "react-redux";
-import { activateFCB } from "features/uiSlice";
+import { activateFCB, initFrameArray } from "features/uiSlice";
 
 export default function ResultsPage() {
-  const { frameIndex, buttonIndex } = useSelector((state) => state.ui);
+  const { buttonIndex, frameIndex, frameArray } = useSelector(
+    (state) => state.ui
+  );
+
   const location = useLocation();
   let history = useHistory();
   const dispatch = useDispatch();
   const fileInputRef = useRef();
 
-  const [frameArray1, setframeArray1] = useState(location.state.layout);
-
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
       let newImg = URL.createObjectURL(event.target.files[0]);
-      setframeArray1((arr) => {
-        let newArr = [...arr];
-        newArr[frameIndex].image = newImg;
-        return newArr;
-      });
+      let newArr = [...frameArray];
+      newArr[frameIndex].image = newImg;
+      dispatch(initFrameArray(newArr));
     }
   };
 
   const handleAddFrame = (e) => {
-    let frameArray = [...frameArray1];
+    let frameArray = [...frameArray];
     let key = e.target.id;
     console.log(key);
     console.log(frameArray);
@@ -41,13 +40,13 @@ export default function ResultsPage() {
     let temp = { ...frameArray[key] };
     temp.key = frameArray[frameArray.length - 1].key + 1;
     console.log(temp);
-    setframeArray1([...frameArray1, temp]);
+    dispatch(initFrameArray([...frameArray, temp]));
     console.log(frameArray);
-    console.log(frameArray1);
+    console.log(frameArray);
   };
 
   const handleDeleteFrame = (e) => {
-    let frameArray = [...frameArray1];
+    let frameArray = [...frameArray];
     console.log(frameArray);
     console.log(e.target.id);
     let key = frameArray.findIndex((obj) => obj.key == e.target.id);
@@ -55,16 +54,14 @@ export default function ResultsPage() {
     if (key !== -1) {
       frameArray.splice(key, 1);
     }
-    setframeArray1(frameArray);
-    console.log(frameArray1);
+    dispatch(initFrameArray(frameArray));
+    console.log(frameArray);
   };
 
   const handleResetChanges = () => {
-    setframeArray1((arr) => {
-      let newArr = [...arr];
-      newArr[frameIndex].image = null;
-      return newArr;
-    });
+    let newArr = [...frameArray];
+    newArr[frameIndex].image = null;
+    dispatch(initFrameArray(newArr));
   };
 
   const handleApplyChanges = () => {
@@ -112,19 +109,12 @@ export default function ResultsPage() {
           style={{ width: location.state.areaWidth + "%" }}
         >
           <div>
-            {frameArray1.map((frameObj, index) => (
+            {frameArray.map((frameObj, index) => (
               <div key={frameObj.key}>
                 <Draggable
                   disabled={!(index === frameIndex && buttonIndex === 1)}
                 >
                   <div>
-                    {/* <FrameButton
-                      index={frameObj.key}
-                      marginLeft={frameObj.left + frameObj.width / 2}
-                      top={frameObj.top ? frameObj.top / 2.6 : "auto"}
-                      onClickAdd={(e) => handleAddFrame(e)}
-                      onClickDelete={(e) => handleDeleteFrame(e)}
-                    /> */}
                     <Frame
                       frameIndex={index}
                       showButtons={true}

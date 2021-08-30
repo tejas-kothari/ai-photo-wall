@@ -7,9 +7,12 @@ import Frame from "components/Frame";
 import wallImg from "assets/wall-area.png";
 import testImg from "assets/test-img.png";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { initFrameArray } from "features/uiSlice";
 
 export default function WallAreaPage() {
   let history = useHistory();
+  const dispatch = useDispatch();
   const [numFrames, setNumFrames] = useState(1);
   const [sizeVal, setSizeVal] = useState("2m X 2.2m");
   const [sizePreset, setSizePreset] = useState("Large");
@@ -23,6 +26,19 @@ export default function WallAreaPage() {
       setFrameAreaWidth(frameAreaRef.current.offsetWidth);
     }
   });
+
+  const handleSelectLayout = (layoutObj) => {
+    console.log(layoutObj);
+    dispatch(initFrameArray(layoutObj));
+    history.push("/results", {
+      areaWidth: calcFrameAreaWidth(),
+      wallImage: wallImg,
+      frameAreaWidth: frameAreaWidth,
+      testImg: testImg,
+      sizeVal: sizeVal,
+      scale: scale,
+    });
+  };
 
   const inspireFrameLayout = [
     [{ width: 0.35, ratio: 1.6, left: 0.5 }],
@@ -197,17 +213,7 @@ export default function WallAreaPage() {
           .map((layoutObj) => (
             <div
               className="frameRoomContainer"
-              onClick={() =>
-                history.push("/results", {
-                  areaWidth: calcFrameAreaWidth(),
-                  layout: layoutObj,
-                  wallImage: wallImg,
-                  frameAreaWidth: frameAreaWidth,
-                  testImg: testImg,
-                  sizeVal: sizeVal,
-                  scale: scale,
-                })
-              }
+              onClick={() => handleSelectLayout(layoutObj)}
             >
               <img src={wallImg} className="roomImg" />
               <div
