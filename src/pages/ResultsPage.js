@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import "styles.css";
 import "./ResultsPage.css";
-import Frame from "components/Frame";
+import FrameWall from "components/FrameWall";
 import ActionButton from "components/ActionButton";
 import download_icon from "assets/download_icon.svg";
 import { useLocation } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import Draggable from "react-draggable";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { useDispatch, useSelector } from "react-redux";
@@ -70,46 +69,12 @@ export default function ResultsPage() {
           <h3 className="infoContent"> {location.state.scale} </h3>
         </div>
       </div>
-      <div className="frameRoomContainer">
-        <img src={location.state.wallImage} className="roomImg" />
-        <div
-          className="frameArea"
-          style={{ width: location.state.areaWidth + "%" }}
-        >
-          <div>
-            {frameArray.map((frameObj, index) => (
-              <div key={frameObj.key}>
-                <Draggable
-                  disabled={!(index === frameIndex && buttonIndex === 1)}
-                >
-                  <div>
-                    <Frame
-                      frameIndex={index}
-                      showButtons={true}
-                      img={frameObj.image}
-                      className="framePos"
-                      style={{
-                        width: frameObj.width * 100 + "%",
-                        height:
-                          location.state.frameAreaWidth *
-                          frameObj.width *
-                          frameObj.ratio,
-                        left: frameObj.left
-                          ? frameObj.left * 100 + "%"
-                          : "auto",
-                        top: frameObj.top ? frameObj.top : "auto",
-                        transform: frameObj.top
-                          ? "translate(-50%, -50%)"
-                          : "translate(-50%, 0)",
-                      }}
-                    />
-                  </div>
-                </Draggable>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+      <FrameWall
+        showButtons={true}
+        wallImage={location.state.wallImage}
+        areaWidth={location.state.areaWidth}
+        frameArray={frameArray}
+      />
       <div className="resultsDetails">
         {buttonIndex === 0 ? (
           <div className="changeImgContainer">

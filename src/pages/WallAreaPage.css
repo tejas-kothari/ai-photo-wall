@@ -61,33 +61,6 @@
   margin-right: 10px;
 }
 
-.frameRoomContainer {
-  position: relative;
-  overflow: hidden;
-  margin-bottom: 20px;
-}
-
-.frameArea {
-  position: absolute;
-  top: 8%;
-  left: 50%;
-  right: 50%;
-  transform: translateX(-50%);
-  min-height: 20px;
-}
-
-.frameRoomContainer .roomImg {
-  margin-bottom: 0px;
-}
-
-.framesContainer {
-  position: relative;
-}
-
-.framePos {
-  position: absolute;
-}
-
 .WA-backButton {
   margin: 12px 0px;
 }

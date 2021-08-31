@@ -3,7 +3,7 @@ import "styles.css";
 import "./WallAreaPage.css";
 import BubbleButton from "components/BubbleButton";
 import ActionButton from "components/ActionButton";
-import Frame from "components/Frame";
+import FrameWall from "components/FrameWall";
 import wallImg from "assets/wall-area.png";
 import testImg from "assets/test-img.png";
 import { useHistory } from "react-router-dom";
@@ -58,7 +58,7 @@ export default function WallAreaPage() {
         width: 0.56,
         ratio: 0.625,
         left: 0.78,
-        top: frameAreaWidth * 0.35 * 1.6 * 0.5,
+        top: 0.35 * 1.6 * 0.5,
       },
     ],
     [
@@ -75,19 +75,19 @@ export default function WallAreaPage() {
         width: 0.38,
         ratio: 0.625,
         left: 0.1,
-        top: frameAreaWidth * 0.26 * 1.6 * 0.4,
+        top: 0.26 * 1.6 * 0.4,
       },
       {
         width: 0.38,
         ratio: 0.625,
         left: 0.5,
-        top: frameAreaWidth * 0.26 * 1.6 * 0.4,
+        top: 0.26 * 1.6 * 0.4,
       },
       {
         width: 0.38,
         ratio: 0.625,
         left: 0.9,
-        top: frameAreaWidth * 0.26 * 1.6 * 0.4,
+        top: 0.26 * 1.6 * 0.4,
       },
     ],
     [
@@ -96,7 +96,7 @@ export default function WallAreaPage() {
         width: 0.416,
         ratio: 0.625,
         left: 0.5,
-        top: frameAreaWidth * 0.26 * 1.6 * 0.5,
+        top: 0.26 * 1.6 * 0.5,
       },
       { width: 0.26, ratio: 1.6, left: 0.87 },
     ],
@@ -105,14 +105,14 @@ export default function WallAreaPage() {
         width: 0.416,
         ratio: 0.625,
         left: 0.13,
-        top: frameAreaWidth * 0.26 * 1.6 * 0.5,
+        top: 0.26 * 1.6 * 0.5,
       },
       { width: 0.26, ratio: 1.6, left: 0.5 },
       {
         width: 0.416,
         ratio: 0.625,
         left: 0.87,
-        top: frameAreaWidth * 0.26 * 1.6 * 0.5,
+        top: 0.26 * 1.6 * 0.5,
       },
     ],
     [
@@ -121,10 +121,6 @@ export default function WallAreaPage() {
       { width: 0.35, ratio: 1, left: 0.9 },
     ],
   ];
-
-  const numToPerString = (num) => {
-    return num * 100 + "%";
-  };
 
   const calcFrameAreaWidth = () => {
     const parsedDim = sizeVal
@@ -210,39 +206,18 @@ export default function WallAreaPage() {
       </div>
       <div className="imgList">
         {inspireFrameLayout
-          .filter((layoutObj) => layoutObj.length === numFrames)
-          .map((layoutObj) => (
-            <div
-              className="frameRoomContainer"
-              onClick={() => handleSelectLayout(layoutObj)}
-            >
-              <img src={wallImg} className="roomImg" />
-              <div
-                className="frameArea"
-                style={{ width: calcFrameAreaWidth() + "%" }}
-              >
-                <div className="framesContainer" ref={frameAreaRef}>
-                  {layoutObj.map((frameObj) => (
-                    <Frame
-                      img={testImg}
-                      className="framePos"
-                      style={{
-                        width: numToPerString(frameObj.width),
-                        height:
-                          frameAreaWidth * frameObj.width * frameObj.ratio,
-                        left: frameObj.left
-                          ? numToPerString(frameObj.left)
-                          : "auto",
-                        top: frameObj.top ? frameObj.top : "auto",
-                        transform: frameObj.top
-                          ? "translate(-50%, -50%)"
-                          : "translate(-50%, 0)",
-                      }}
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
+          .filter((frameArrObj) => frameArrObj.length === numFrames)
+          .map((frameArrObj) => {
+            frameArrObj.forEach((frameObj) => (frameObj.image = testImg));
+            return frameArrObj;
+          })
+          .map((frameArrObj) => (
+            <FrameWall
+              wallImage={wallImg}
+              areaWidth={calcFrameAreaWidth()}
+              frameArray={frameArrObj}
+              onClick={() => handleSelectLayout(frameArrObj)}
+            />
           ))}
       </div>
       <ActionButton
