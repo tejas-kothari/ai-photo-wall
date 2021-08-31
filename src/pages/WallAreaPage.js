@@ -8,7 +8,7 @@ import wallImg from "assets/wall-area.png";
 import testImg from "assets/test-img.png";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setFrameArray } from "features/uiSlice";
+import { addFrame, resetFrameArr } from "features/uiSlice";
 
 export default function WallAreaPage() {
   let history = useHistory();
@@ -28,9 +28,11 @@ export default function WallAreaPage() {
   });
 
   const handleSelectLayout = (layoutObj) => {
-    console.log(layoutObj);
-    layoutObj.forEach((val) => ((val.image = null), (val.writable = true)));
-    dispatch(setFrameArray(layoutObj));
+    dispatch(resetFrameArr());
+    layoutObj.forEach((frameObj) => {
+      frameObj.image = null;
+      dispatch(addFrame(frameObj));
+    });
     history.push("/results", {
       areaWidth: calcFrameAreaWidth(),
       wallImage: wallImg,

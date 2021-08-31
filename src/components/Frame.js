@@ -17,7 +17,9 @@ export default function Frame(props) {
   const dispatch = useDispatch();
 
   const addNewFrame = () => {
-    dispatch(addFrame(frameArray[props.frameIndex]));
+    let newFrame = { ...frameArray[props.frameIndex] };
+    newFrame.image = null;
+    dispatch(addFrame(newFrame));
     dispatch(resetFCB());
   };
 

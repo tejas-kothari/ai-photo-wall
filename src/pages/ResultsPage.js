@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import "styles.css";
 import "./ResultsPage.css";
 import FrameWall from "components/FrameWall";
@@ -9,7 +9,7 @@ import { useHistory } from "react-router-dom";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { useDispatch, useSelector } from "react-redux";
-import { resetFCB, setFrameArray, changeImg } from "features/uiSlice";
+import { resetFCB, changeImg } from "features/uiSlice";
 
 export default function ResultsPage() {
   const { buttonIndex, frameIndex, frameArray } = useSelector(

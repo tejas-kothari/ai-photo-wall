@@ -29,29 +29,37 @@ export default function FrameWall(props) {
         ref={frameAreaRef}
       >
         {props.frameArray.map((frameObj, index) => (
-          <Draggable
-            disabled={
-              !(props.showButtons && index === frameIndex && buttonIndex === 1)
-            }
-          >
-            <div>
-              <Frame
-                frameIndex={index}
-                showButtons={props.showButtons}
-                img={frameObj.image}
-                className="framePos"
-                style={{
-                  width: numToPerString(frameObj.width),
-                  height: frameAreaWidth * frameObj.width * frameObj.ratio,
-                  left: frameObj.left ? numToPerString(frameObj.left) : "auto",
-                  top: frameObj.top ? frameObj.top * frameAreaWidth : "auto",
-                  transform: frameObj.top
-                    ? "translate(-50%, -50%)"
-                    : "translate(-50%, 0)",
-                }}
-              />
-            </div>
-          </Draggable>
+          <div key={frameObj.key}>
+            <Draggable
+              disabled={
+                !(
+                  props.showButtons &&
+                  index === frameIndex &&
+                  buttonIndex === 1
+                )
+              }
+            >
+              <div>
+                <Frame
+                  frameIndex={index}
+                  showButtons={props.showButtons}
+                  img={frameObj.image}
+                  className="framePos"
+                  style={{
+                    width: numToPerString(frameObj.width),
+                    height: frameAreaWidth * frameObj.width * frameObj.ratio,
+                    left: frameObj.left
+                      ? numToPerString(frameObj.left)
+                      : "auto",
+                    top: frameObj.top ? frameObj.top * frameAreaWidth : "auto",
+                    transform: frameObj.top
+                      ? "translate(-50%, -50%)"
+                      : "translate(-50%, 0)",
+                  }}
+                />
+              </div>
+            </Draggable>
+          </div>
         ))}
       </div>
     </div>

@@ -4,6 +4,7 @@ const initialState = {
   frameIndex: -1,
   buttonIndex: -1,
   frameArray: [],
+  frameKey: 0,
 };
 
 export const uiSlice = createSlice({
@@ -25,12 +26,19 @@ export const uiSlice = createSlice({
       state.frameArray[action.payload.frameIndex].image = action.payload.image;
     },
     addFrame: (state, action) => {
-      state.frameArray.push(action.payload);
+      let frameObj = { ...action.payload };
+      frameObj.key = state.frameKey;
+      state.frameKey += 1;
+      frameObj.image = action.payload.image ? action.payload.image : null;
+      state.frameArray.push(frameObj);
       console.log(current(state.frameArray));
     },
     deleteFrame: (state, action) => {
       state.frameArray.splice(action.payload, 1);
       console.log(current(state.frameArray));
+    },
+    resetFrameArr: (state, _) => {
+      state.frameArray = [];
     },
   },
 });
@@ -43,6 +51,7 @@ export const {
   changeImg,
   addFrame,
   deleteFrame,
+  resetFrameArr,
 } = uiSlice.actions;
 
 export default uiSlice.reducer;
