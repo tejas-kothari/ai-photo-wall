@@ -8,7 +8,7 @@ import { ReactComponent as EditIcon } from "assets/add_delete.svg";
 import { useDispatch, useSelector } from "react-redux";
 import new_frame from "assets/new_frame.svg";
 import delete_frame from "assets/delete_frame.svg";
-import { setFrameArray, resetFCB } from "features/uiSlice";
+import { resetFCB, addFrame, deleteFrame } from "features/uiSlice";
 
 export default function Frame(props) {
   const { frameIndex, buttonIndex, frameArray } = useSelector(
@@ -17,18 +17,12 @@ export default function Frame(props) {
   const dispatch = useDispatch();
 
   const addNewFrame = () => {
-    let newArr = [...frameArray];
-    let newFrame = newArr[frameIndex];
-    newArr.push(newFrame);
-    dispatch(setFrameArray(newArr));
+    dispatch(addFrame(frameArray[props.frameIndex]));
     dispatch(resetFCB());
   };
 
   const deleteNewFrame = () => {
-    let newArr = [...frameArray];
-    console.log(frameIndex);
-    newArr.splice(frameIndex, 1);
-    dispatch(setFrameArray(newArr));
+    dispatch(deleteFrame(props.frameIndex));
     dispatch(resetFCB());
   };
 

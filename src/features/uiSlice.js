@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 const initialState = {
   frameIndex: -1,
@@ -19,11 +19,18 @@ export const uiSlice = createSlice({
       state.buttonIndex = -1;
     },
     setFrameArray: (state, action) => {
-      console.log(action.payload);
       state.frameArray = [...action.payload];
     },
     changeImg: (state, action) => {
       state.frameArray[action.payload.frameIndex].image = action.payload.image;
+    },
+    addFrame: (state, action) => {
+      state.frameArray.push(action.payload);
+      console.log(current(state.frameArray));
+    },
+    deleteFrame: (state, action) => {
+      state.frameArray.splice(action.payload, 1);
+      console.log(current(state.frameArray));
     },
   },
 });
@@ -34,6 +41,8 @@ export const {
   resetFCB,
   setFrameArray,
   changeImg,
+  addFrame,
+  deleteFrame,
 } = uiSlice.actions;
 
 export default uiSlice.reducer;
