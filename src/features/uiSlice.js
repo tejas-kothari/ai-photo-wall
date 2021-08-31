@@ -22,10 +22,18 @@ export const uiSlice = createSlice({
       console.log(action.payload);
       state.frameArray = [...action.payload];
     },
+    changeImg: (state, action) => {
+      state.frameArray[action.payload.frameIndex].image = action.payload.image;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { activateFCB, resetFCB, setFrameArray } = uiSlice.actions;
+export const {
+  activateFCB,
+  resetFCB,
+  setFrameArray,
+  changeImg,
+} = uiSlice.actions;
 
 export default uiSlice.reducer;

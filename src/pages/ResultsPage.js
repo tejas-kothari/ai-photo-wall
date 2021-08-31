@@ -9,7 +9,7 @@ import { useHistory } from "react-router-dom";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { useDispatch, useSelector } from "react-redux";
-import { resetFCB, setFrameArray } from "features/uiSlice";
+import { resetFCB, setFrameArray, changeImg } from "features/uiSlice";
 
 export default function ResultsPage() {
   const { buttonIndex, frameIndex, frameArray } = useSelector(
@@ -23,17 +23,22 @@ export default function ResultsPage() {
 
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
-      let newImg = URL.createObjectURL(event.target.files[0]);
-      let newArr = [...frameArray];
-      newArr[frameIndex].image = newImg;
-      dispatch(setFrameArray(newArr));
+      dispatch(
+        changeImg({
+          frameIndex: frameIndex,
+          image: URL.createObjectURL(event.target.files[0]),
+        })
+      );
     }
   };
 
   const handleResetChanges = () => {
-    let newArr = [...frameArray];
-    newArr[frameIndex].image = null;
-    dispatch(setFrameArray(newArr));
+    dispatch(
+      changeImg({
+        frameIndex: frameIndex,
+        image: null,
+      })
+    );
   };
 
   const handleApplyChanges = () => {
