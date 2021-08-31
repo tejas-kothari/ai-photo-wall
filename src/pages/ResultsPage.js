@@ -10,7 +10,7 @@ import Draggable from "react-draggable";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { useDispatch, useSelector } from "react-redux";
-import { activateFCB, initFrameArray } from "features/uiSlice";
+import { resetFCB, setFrameArray } from "features/uiSlice";
 
 export default function ResultsPage() {
   const { buttonIndex, frameIndex, frameArray } = useSelector(
@@ -27,50 +27,18 @@ export default function ResultsPage() {
       let newImg = URL.createObjectURL(event.target.files[0]);
       let newArr = [...frameArray];
       newArr[frameIndex].image = newImg;
-      dispatch(initFrameArray(newArr));
+      dispatch(setFrameArray(newArr));
     }
-  };
-
-  const handleAddFrame = (e) => {
-    let frameArray = [...frameArray];
-    let key = e.target.id;
-    console.log(key);
-    console.log(frameArray);
-    console.log(frameArray[frameArray.length - 1]);
-    let temp = { ...frameArray[key] };
-    temp.key = frameArray[frameArray.length - 1].key + 1;
-    console.log(temp);
-    dispatch(initFrameArray([...frameArray, temp]));
-    console.log(frameArray);
-    console.log(frameArray);
-  };
-
-  const handleDeleteFrame = (e) => {
-    let frameArray = [...frameArray];
-    console.log(frameArray);
-    console.log(e.target.id);
-    let key = frameArray.findIndex((obj) => obj.key == e.target.id);
-    console.log(key);
-    if (key !== -1) {
-      frameArray.splice(key, 1);
-    }
-    dispatch(initFrameArray(frameArray));
-    console.log(frameArray);
   };
 
   const handleResetChanges = () => {
     let newArr = [...frameArray];
     newArr[frameIndex].image = null;
-    dispatch(initFrameArray(newArr));
+    dispatch(setFrameArray(newArr));
   };
 
   const handleApplyChanges = () => {
-    dispatch(
-      activateFCB({
-        frameIndex: -1,
-        buttonIndex: -1,
-      })
-    );
+    dispatch(resetFCB());
   };
 
   const downloadDocument = () => {

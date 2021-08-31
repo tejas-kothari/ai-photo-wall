@@ -5,12 +5,32 @@ import FrameCircleButton from "components/FrameCircleButton.js";
 import { ReactComponent as ChangeIcon } from "assets/change_icon.svg";
 import { ReactComponent as MoveIcon } from "assets/move_icon.svg";
 import { ReactComponent as EditIcon } from "assets/add_delete.svg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import new_frame from "assets/new_frame.svg";
 import delete_frame from "assets/delete_frame.svg";
+import { setFrameArray, resetFCB } from "features/uiSlice";
 
 export default function Frame(props) {
-  const { frameIndex, buttonIndex } = useSelector((state) => state.ui);
+  const { frameIndex, buttonIndex, frameArray } = useSelector(
+    (state) => state.ui
+  );
+  const dispatch = useDispatch();
+
+  const addNewFrame = () => {
+    let newArr = [...frameArray];
+    let newFrame = newArr[frameIndex];
+    newArr.push(newFrame);
+    dispatch(setFrameArray(newArr));
+    dispatch(resetFCB());
+  };
+
+  const deleteNewFrame = () => {
+    let newArr = [...frameArray];
+    console.log(frameIndex);
+    newArr.splice(frameIndex, 1);
+    dispatch(setFrameArray(newArr));
+    dispatch(resetFCB());
+  };
 
   return (
     <div className={"Frame " + props.className} style={props.style}>
@@ -44,17 +64,14 @@ export default function Frame(props) {
           </FrameCircleButton>
           {frameIndex === props.frameIndex && buttonIndex === 2 && (
             <div className="edit-options-container">
-              <div
-                className="add-button edit-options"
-                onClick={props.onClickAdd}
-              >
+              <div className="add-button edit-options" onClick={addNewFrame}>
                 <img src={new_frame} />
                 <div className="optionText"> Add New Frame </div>
               </div>
               <div className="options-divider" />
               <div
                 className="delete-button edit-options"
-                onClick={props.onClickDelete}
+                onClick={deleteNewFrame}
               >
                 <img src={delete_frame} />
                 <div className="optionText">Delete Frame</div>
