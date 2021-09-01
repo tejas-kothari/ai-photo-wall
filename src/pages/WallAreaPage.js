@@ -1,14 +1,14 @@
-import { useState, useRef, useLayoutEffect } from "react";
+import { useState, useRef } from "react";
 import "styles.css";
 import "./WallAreaPage.css";
 import BubbleButton from "components/BubbleButton";
 import ActionButton from "components/ActionButton";
 import FrameWall from "components/FrameWall";
-import wallImg from "assets/wall-area.png";
+import wallImage from "assets/wall-area.png";
 import testImg from "assets/test-img.png";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addFrame, resetFrameArr } from "features/uiSlice";
+import { addFrame, resetFrameArr, setWallData } from "features/uiSlice";
 
 export default function WallAreaPage() {
   let history = useHistory();
@@ -18,14 +18,6 @@ export default function WallAreaPage() {
   const [sizePreset, setSizePreset] = useState("Large");
   const sizeInput = useRef(null);
   const [scale, setScale] = useState("Small (38%)");
-  const frameAreaRef = useRef(null);
-  const [frameAreaWidth, setFrameAreaWidth] = useState(0);
-
-  useLayoutEffect(() => {
-    if (frameAreaRef.current) {
-      setFrameAreaWidth(frameAreaRef.current.offsetWidth);
-    }
-  });
 
   const handleSelectLayout = (layoutObj) => {
     dispatch(resetFrameArr());
@@ -33,14 +25,15 @@ export default function WallAreaPage() {
       frameObj.image = null;
       dispatch(addFrame(frameObj));
     });
-    history.push("/results", {
-      areaWidth: calcFrameAreaWidth(),
-      wallImage: wallImg,
-      frameAreaWidth: frameAreaWidth,
-      testImg: testImg,
-      sizeVal: sizeVal,
-      scale: scale,
-    });
+    dispatch(
+      setWallData({
+        frameAreaWidth: calcFrameAreaWidth(),
+        wallImage: wallImage,
+        wallSize: sizeVal,
+        wallScale: scale,
+      })
+    );
+    history.push("/results");
   };
 
   const inspireFrameLayout = [
@@ -215,7 +208,7 @@ export default function WallAreaPage() {
           })
           .map((frameArrObj) => (
             <FrameWall
-              wallImage={wallImg}
+              wallImage={wallImage}
               areaWidth={calcFrameAreaWidth()}
               frameArray={frameArrObj}
               onClick={() => handleSelectLayout(frameArrObj)}

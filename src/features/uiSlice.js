@@ -4,6 +4,10 @@ const initialState = {
   frameIndex: -1,
   buttonIndex: -1,
   frameArray: [],
+  frameAreaWidth: 0,
+  wallImage: null,
+  wallSize: "",
+  wallScale: "",
   frameKey: 0,
 };
 
@@ -40,6 +44,12 @@ export const uiSlice = createSlice({
     resetFrameArr: (state, _) => {
       state.frameArray = [];
     },
+    setWallData: (state, action) => {
+      state.frameAreaWidth = action.payload.frameAreaWidth;
+      state.wallImage = action.payload.wallImage;
+      state.wallSize = action.payload.wallSize;
+      state.wallScale = action.payload.wallScale;
+    },
   },
 });
 
@@ -52,6 +62,7 @@ export const {
   addFrame,
   deleteFrame,
   resetFrameArr,
+  setWallData,
 } = uiSlice.actions;
 
 export default uiSlice.reducer;

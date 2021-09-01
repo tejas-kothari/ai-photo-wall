@@ -4,7 +4,6 @@ import "./ResultsPage.css";
 import FrameWall from "components/FrameWall";
 import ActionButton from "components/ActionButton";
 import download_icon from "assets/download_icon.svg";
-import { useLocation } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
@@ -12,11 +11,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { resetFCB, changeImg } from "features/uiSlice";
 
 export default function ResultsPage() {
-  const { buttonIndex, frameIndex, frameArray } = useSelector(
-    (state) => state.ui
-  );
+  const {
+    buttonIndex,
+    frameIndex,
+    frameArray,
+    wallImage,
+    wallSize,
+    wallScale,
+    frameAreaWidth,
+  } = useSelector((state) => state.ui);
 
-  const location = useLocation();
   let history = useHistory();
   const dispatch = useDispatch();
   const fileInputRef = useRef();
@@ -67,17 +71,17 @@ export default function ResultsPage() {
       <div className="infoContainer">
         <div style={{ width: 80 }}>
           <h3 className="infoTitle"> Wall Size </h3>
-          <h3 className="infoContent"> {location.state.sizeVal} </h3>
+          <h3 className="infoContent">{wallSize}</h3>
         </div>
         <div style={{ width: 80 }}>
-          <h3 className="infoTitle"> Scale </h3>
-          <h3 className="infoContent"> {location.state.scale} </h3>
+          <h3 className="infoTitle">Scale</h3>
+          <h3 className="infoContent">{wallScale}</h3>
         </div>
       </div>
       <FrameWall
         showButtons={true}
-        wallImage={location.state.wallImage}
-        areaWidth={location.state.areaWidth}
+        wallImage={wallImage}
+        areaWidth={frameAreaWidth}
         frameArray={frameArray}
       />
       <div className="resultsDetails">
