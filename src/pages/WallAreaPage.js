@@ -149,7 +149,7 @@ export default function WallAreaPage() {
   };
 
   return (
-    <div className="WallAreaPage">
+    <div className="WallAreaPage standardPagePadding">
       <h1 className="PageTitle">Wall Area</h1>
       <div className="optionLayout">
         <span className="optionTitle">No. of frames:</span>

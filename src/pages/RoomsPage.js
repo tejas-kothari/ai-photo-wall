@@ -12,7 +12,7 @@ export default function RoomsPage() {
   const [activatedBtn, setActivatedBtn] = useState(0);
 
   return (
-    <div className="RoomsPage">
+    <div className="RoomsPage standardPagePadding">
       <h1 className="PageTitle">For you</h1>
       <div className="BubbleContainer">
         {["Living Room", "Bedroom", "Dining Room"].map((room, index) => (

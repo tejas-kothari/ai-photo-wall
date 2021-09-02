@@ -67,8 +67,8 @@ export default function ResultsPage() {
 
   return (
     <div className="ResultsPage" id="ResultsPage">
-      <h1 className="PageTitle">Your AI Wall</h1>
-      <div className="infoContainer">
+      <h1 className="PageTitle standardPagePadding">Your AI Wall</h1>
+      <div className="infoContainer standardPagePadding">
         <div style={{ width: 80 }}>
           <h3 className="infoTitle"> Wall Size </h3>
           <h3 className="infoContent">{wallSize}</h3>
@@ -84,7 +84,7 @@ export default function ResultsPage() {
         areaWidth={frameAreaWidth}
         frameArray={frameArray}
       />
-      <div className="resultsDetails">
+      <div className="resultsDetails standardPagePadding">
         {buttonIndex === 0 ? (
           <div className="changeImgContainer">
             <ActionButton onClick={() => fileInputRef.current.click()}>
@@ -101,8 +101,7 @@ export default function ResultsPage() {
           <div>Available At:</div>
         )}
       </div>
-
-      <div className="actionButtonContainer">
+      <div className="actionButtonContainer standardPagePadding">
         {buttonIndex === 0 ? (
           <>
             <ActionButton onClick={handleResetChanges}>Reset</ActionButton>

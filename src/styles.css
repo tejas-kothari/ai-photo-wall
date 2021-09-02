@@ -5,6 +5,10 @@
   --primary: #ff9632;
 }
 
+.standardPagePadding {
+  padding: 0 35px;
+}
+
 .PageTitle {
   font-family: DM Serif Display;
   font-size: 24px;
