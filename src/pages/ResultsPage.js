@@ -25,7 +25,7 @@ export default function ResultsPage() {
   let history = useHistory();
   const dispatch = useDispatch();
   const fileInputRef = useRef();
-	const [frameRatio, setFrameRatio] = useState(1);
+  const [frameRatio, setFrameRatio] = useState(1);
 
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
@@ -67,52 +67,92 @@ export default function ResultsPage() {
     });
   };
 
-	const getFrameSize = () => {
+  const getFrameSize = () => {
     // frame sizes [width, height]
-    var frameSizes = [[30.5,40.5, "LOMVIKEN", "99.9"], [53,73, "SILVERHÖJDEN", "129.9"], [61.5,91.5, "LOMVIKEN", "249.9"], [32,42, "RIBBA", "99.9"], [42,52, "RIBBA", "119.9"], [21.5,30.5, "LOMVIKEN", "69.9"], [24,33, "FISKBO", "19.9"], [12,20, "FIESTAD", "19.9"], [37,47, "EDSBRUK", "129.9"], [47,57, "EDSBRUK", "169.9"], [21,26, "LERBODA", "59.9"],
-                [52,72, "KNOPPÄNG", "119.9"], [64,94, "KNOPPÄNG", "149.9"], [23,32, "HOVSTA", "59.9"], [23,28, "VÄSTANHED", "59.9"], [40.5,50.5, "LOMVIKEN", "129.9"], [43,53, "SILVERHÖJDEN", "99.9"], [12,26, "GALLBODA", "39"], [15,20, "HOVSTA", "29.9"], [57,77, "RAMSBORG", "249.9"], [50.5,70.5, "LOMVIKEN", "199.9"], [23.5,32.5, "RIBBA", "59.9"], [15,20, "HOVSTA", "29.9"],
-                [25,52, "RIBBA", "99.9"], [20,25, "EDSBRUK", "49.9"], [37,37, "SANNAHED", "99.9"], [16.5,16.5, "LERBODA", "49.9"], [25,25, "HOVSTA", "69.9"], [13,18, "FISKBO", "9.9"], [33,43, "VÄSTANHED", "99.9"], [28,37, "EDSBRUK", "79.9"], [68,98, "EDSBRUK", "199"], [27,27, "SANNAHED", "69.9"], [24,33, "FISKBO", "19.9"], [47.5, 58, "RAMSBORG", "149.9"], [32.5,32.5, "LOMVIKEN", "89.9"],
-                [21,26, "LERBODA", "59.9"], [33,43, "VÄSTANHED", "99.9"], [12,17, "RIBBA", "29.9"], [16,21, "FISKBO", "12.9"]];
-    var smallestDist = Number.POSITIVE_INFINITY
-    var currentFrame = frameSizes[0]
-		var height = frameAreaWidth * frameRatio;
-		var width = frameAreaWidth;
-    console.log(frameSizes.length)
+    var frameSizes = [
+      [30.5, 40.5, "LOMVIKEN", "99.9"],
+      [53, 73, "SILVERHÖJDEN", "129.9"],
+      [61.5, 91.5, "LOMVIKEN", "249.9"],
+      [32, 42, "RIBBA", "99.9"],
+      [42, 52, "RIBBA", "119.9"],
+      [21.5, 30.5, "LOMVIKEN", "69.9"],
+      [24, 33, "FISKBO", "19.9"],
+      [12, 20, "FIESTAD", "19.9"],
+      [37, 47, "EDSBRUK", "129.9"],
+      [47, 57, "EDSBRUK", "169.9"],
+      [21, 26, "LERBODA", "59.9"],
+      [52, 72, "KNOPPÄNG", "119.9"],
+      [64, 94, "KNOPPÄNG", "149.9"],
+      [23, 32, "HOVSTA", "59.9"],
+      [23, 28, "VÄSTANHED", "59.9"],
+      [40.5, 50.5, "LOMVIKEN", "129.9"],
+      [43, 53, "SILVERHÖJDEN", "99.9"],
+      [12, 26, "GALLBODA", "39"],
+      [15, 20, "HOVSTA", "29.9"],
+      [57, 77, "RAMSBORG", "249.9"],
+      [50.5, 70.5, "LOMVIKEN", "199.9"],
+      [23.5, 32.5, "RIBBA", "59.9"],
+      [15, 20, "HOVSTA", "29.9"],
+      [25, 52, "RIBBA", "99.9"],
+      [20, 25, "EDSBRUK", "49.9"],
+      [37, 37, "SANNAHED", "99.9"],
+      [16.5, 16.5, "LERBODA", "49.9"],
+      [25, 25, "HOVSTA", "69.9"],
+      [13, 18, "FISKBO", "9.9"],
+      [33, 43, "VÄSTANHED", "99.9"],
+      [28, 37, "EDSBRUK", "79.9"],
+      [68, 98, "EDSBRUK", "199"],
+      [27, 27, "SANNAHED", "69.9"],
+      [24, 33, "FISKBO", "19.9"],
+      [47.5, 58, "RAMSBORG", "149.9"],
+      [32.5, 32.5, "LOMVIKEN", "89.9"],
+      [21, 26, "LERBODA", "59.9"],
+      [33, 43, "VÄSTANHED", "99.9"],
+      [12, 17, "RIBBA", "29.9"],
+      [16, 21, "FISKBO", "12.9"],
+    ];
+    var smallestDist = Number.POSITIVE_INFINITY;
+    var currentFrame = frameSizes[0];
+    var height = frameAreaWidth * frameRatio;
+    var width = frameAreaWidth;
+    console.log(frameSizes.length);
 
-    for(var i=0; i<frameSizes.length; i++){
-      if (height >= width){      //portrait
+    for (var i = 0; i < frameSizes.length; i++) {
+      if (height >= width) {
+        //portrait
         var heightDiff = Math.abs(height - frameSizes[i][1]);
         var widthDiff = Math.abs(width - frameSizes[i][0]);
         var distance = heightDiff + widthDiff;
-      } else if (height < width) {    //landscape
+      } else if (height < width) {
+        //landscape
         var heightDiff = Math.abs(height - frameSizes[i][0]);
         var widthDiff = Math.abs(width - frameSizes[i][1]);
         var distance = heightDiff + widthDiff;
       }
 
-      if ( distance < smallestDist ){
-        if(height == width){
-          if ( heightDiff == widthDiff){
-            smallestDist = distance
-            currentFrame = frameSizes[i]
+      if (distance < smallestDist) {
+        if (height == width) {
+          if (heightDiff == widthDiff) {
+            smallestDist = distance;
+            currentFrame = frameSizes[i];
           }
-        }
-        else{
-          smallestDist = distance
-          currentFrame = frameSizes[i]
+        } else {
+          smallestDist = distance;
+          currentFrame = frameSizes[i];
         }
       }
     }
 
-    if (height >= width){      //portrait
-      var returnValue = currentFrame[1] + "×" + currentFrame[0]
-    } else if (height < width) {    //landscape
-      var returnValue = currentFrame[0] + "×" + currentFrame[1]
+    if (height >= width) {
+      //portrait
+      var returnValue = currentFrame[1] + "×" + currentFrame[0];
+    } else if (height < width) {
+      //landscape
+      var returnValue = currentFrame[0] + "×" + currentFrame[1];
     }
 
-    return [returnValue, currentFrame[2], currentFrame[3]] ;
-
-  }
+    return [returnValue, currentFrame[2], currentFrame[3]];
+  };
 
   return (
     <div className="ResultsPage" id="ResultsPage">
@@ -132,8 +172,8 @@ export default function ResultsPage() {
         wallImage={wallImage}
         areaWidth={frameAreaWidth}
         frameArray={frameArray}
-				wallSize={wallSize}
-				setFrameRatio={setFrameRatio}
+        wallSize={wallSize}
+        setFrameRatio={setFrameRatio}
       />
       <div className="resultsDetails standardPagePadding">
         {buttonIndex === 0 ? (
@@ -150,23 +190,25 @@ export default function ResultsPage() {
           </div>
         ) : (
           <div>
-						<h3>Available At:</h3>
-						<img src={ikea_logo}/>
-						<div style={{display:"flex"}}>
-							<div>
-								<h3 className="infoTitle">Frame Name:</h3>
-								<h3 className="infoTitle">Sizing:</h3>
-								<h3 className="infoTitle">Price:</h3>
-								<h3 className="infoTitle">Link To Buy:</h3>
-							</div>
-							<div>
-								<h3 className="infoContent">{getFrameSize()[1]}</h3>
-								<h3 className="infoContent">{getFrameSize()[0]}</h3>
-								<h3 className="infoContent">${getFrameSize()[2]}</h3>
-								<a className="infoContent" href="https://www.ikea.com.hk">www.ikea.com.hk</a>
-							</div>
-						</div>
-					</div>
+            <h3>Available At:</h3>
+            <img src={ikea_logo} />
+            <div style={{ display: "flex" }}>
+              <div>
+                <h3 className="infoTitle">Frame Name:</h3>
+                <h3 className="infoTitle">Sizing:</h3>
+                <h3 className="infoTitle">Price:</h3>
+                <h3 className="infoTitle">Link To Buy:</h3>
+              </div>
+              <div>
+                <h3 className="infoContent">{getFrameSize()[1]}</h3>
+                <h3 className="infoContent">{getFrameSize()[0]}</h3>
+                <h3 className="infoContent">${getFrameSize()[2]}</h3>
+                <a className="infoContent" href="https://www.ikea.com.hk">
+                  www.ikea.com.hk
+                </a>
+              </div>
+            </div>
+          </div>
         )}
       </div>
       <div className="actionButtonContainer standardPagePadding">
