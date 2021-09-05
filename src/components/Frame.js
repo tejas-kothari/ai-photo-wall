@@ -29,7 +29,7 @@ export default function Frame(props) {
   };
 
   return (
-    <div className={"Frame " + props.className} style={props.style}>
+    <div className={"Frame " + props.className} style={props.style} onClick={props.onClick}>
       <div className="imgContainer">
         <img className="photoImg" src={props.img ? props.img : upload_img} />
         {props.showButtons && (

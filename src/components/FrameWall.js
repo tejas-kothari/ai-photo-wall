@@ -20,6 +20,10 @@ export default function FrameWall(props) {
     return num * 100 + "%";
   };
 
+  const handleClick = (ratio) => {
+    props.setFrameRatio(ratio)
+  }
+
   return (
     <div className="frameRoomContainer" onClick={props.onClick}>
       <img src={props.wallImage} className="roomImg" />
@@ -41,6 +45,7 @@ export default function FrameWall(props) {
             >
               <div>
                 <Frame
+                  onClick={() => handleClick(frameObj.ratio)}
                   frameIndex={index}
                   showButtons={props.showButtons}
                   img={frameObj.image}
